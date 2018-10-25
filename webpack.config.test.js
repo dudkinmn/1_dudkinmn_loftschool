@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+
 let path = require('path');
 let rules = require('./webpack.config.rules')();
 

@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+
 let webpack = require('webpack');
 let HtmlPlugin = require('html-webpack-plugin');
 let CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -16,7 +18,7 @@ rules.push({
 module.exports = {
     entry: './src/index.js',
     output: {
-        filename: '[name].[hash].js',
+        filename: '[name].js',
         path: path.resolve('dist')
     },
     devtool: 'source-map',
