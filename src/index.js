@@ -3,7 +3,7 @@
 import * as lesson1 from './lesson1.js';
 console.log('тест 1');
 
-var f = lesson1.returnCounter(5);
+var f = lesson1.returnCounter();
 
 console.log(f());
 console.log(f());

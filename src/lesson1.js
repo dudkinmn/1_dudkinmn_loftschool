@@ -1,3 +1,5 @@
+import { isUndefined } from 'util';
+
 /* jshint esversion: 6 */ 
 
 export {
@@ -42,6 +44,10 @@ function returnFirstArgument(a) {
    sumWithDefaults(10) вернет 110
  */
 function sumWithDefaults(a, b) {
+    if (isUndefined(b)) { 
+        b = 100 
+    }
+
     return a + b;
 }
 
@@ -72,8 +78,12 @@ function returnFnResult(fn) {
  */
 function returnCounter(number) { 
   
-    return function () {
-        return number++;
+    if (isUndefined(number)) {
+        number = 0;
+    } 
+
+    return function F() {
+        return ++number;
     } ;
 }
 
@@ -87,7 +97,13 @@ function returnCounter(number) {
    returnArgumentsArray(1, 2, 3) вернет [1, 2, 3]
  */
 function returnArgumentsArray() {
-    return arguments;
+    var arr = [];
+
+    for ( let i = 0; i < arguments.length; i++) {
+        arr[i] = arguments[i];
+    }
+
+    return arr;
 }
 
 /*
@@ -105,6 +121,17 @@ function returnArgumentsArray() {
 
    console.log(newSum()) выведет 6
  */
-function bindFunction(fn) {
-    return fn;
+function bindFunction(F, ...args) {
+
+/*    var arr = [];
+    var str = '';
+
+    for ( let i = 1; i < arguments.length; i++) {
+        arr[i-1] = arguments[i];
+    }
+    str = arr.join(', ');
+*/
+    F = F.bind(null, ...args)
+
+    return F;
 } 
