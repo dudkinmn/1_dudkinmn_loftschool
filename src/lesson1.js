@@ -45,7 +45,7 @@ function returnFirstArgument(a) {
  */
 function sumWithDefaults(a, b) {
     if (isUndefined(b)) { 
-        b = 100 
+        b = 100 ;
     }
 
     return a + b;
