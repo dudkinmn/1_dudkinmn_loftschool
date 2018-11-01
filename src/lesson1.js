@@ -127,7 +127,7 @@ function bindFunction(F, ...args) {
     }
     str = arr.join(', ');
 */
-    F = F.bind(null, ...args)
+    F = F.bind(null, ...args);
 
     return F;
 } 

@@ -1,5 +1,7 @@
 /* jshint esversion: 6 */ 
 
+import { isUndefined } from 'util';
+
 /* ДЗ 2 - работа с массивами и объеектами */
 
 /*
@@ -37,14 +39,22 @@ function map(array, fn) {
  Напишите аналог встроенного метода reduce для работы с массивами
  Посмотрите как работает reduce и повторите это поведение для массива, который будет передан в параметре array
  */
-function reduce(array, fn, initial = 0) {
-    let arr = array.slice();
+function reduce(array, fn, initial) {
+    var i, previosValue;
 
-    for (let i = initial; i < arr.length; i++) {
-        arr[i] = fn(arr[i-1], arr[i], i, array);
+    if (isUndefined(initial)) {
+        i = 1;
+        previosValue = array[0];
+    } else {
+        i = 0;
+        previosValue = initial;
     }
 
-    return arr;
+    for (i; i < array.length; i++) {
+        previosValue = fn(previosValue, array[i], i, array);
+    }
+
+    return previosValue;
 }
 
 /*
@@ -57,18 +67,27 @@ function reduce(array, fn, initial = 0) {
  */
 function upperProps(obj) {
     var props = [];
+    var i = 0;
 
-    // props = Object.getOwnPropertyNames(obj);
-    // props = props.forEach(arguments.toUpperCase());
-    
-    for (var name of obj) {
-        let i = 0;
+    function toUpp(name) {
+        console.log(toString(name).toUpperCase());
 
-        props[i] = name.toUppercase();
-        i++;
+        return toString(name).toUpperCase();
+        
     } 
 
-    return props;
+    for (var propsName in obj) {
+        if (obj.hasOwnProperty(propsName)) {
+            props[i] = toUpp(propsName);
+            i++;
+        };
+
+    }
+
+    /* props = Object.keys(obj);
+    props.forEach(toUpp); */
+    
+    return props; 
 }
 
 /*
