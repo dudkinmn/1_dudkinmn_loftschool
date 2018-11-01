@@ -1,6 +1,6 @@
-import { isUndefined } from 'util';
-
 /* jshint esversion: 6 */ 
+
+import { isUndefined } from 'util';
 
 export {
     returnFirstArgument,
@@ -43,11 +43,7 @@ function returnFirstArgument(a) {
  Пример:
    sumWithDefaults(10) вернет 110
  */
-function sumWithDefaults(a, b) {
-    if (isUndefined(b)) { 
-        b = 100 ;
-    }
-
+function sumWithDefaults(a, b = 100) {
     return a + b;
 }
 

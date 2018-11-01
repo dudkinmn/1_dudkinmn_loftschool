@@ -5,10 +5,10 @@ module.exports = function(config) {
         basePath: '',
         frameworks: ['mocha', 'chai'],
         files: [
-            'test/lesson1.js'
+            'test/lesson2.js'
         ],
         preprocessors: {
-            'test/lesson1.js': ['webpack', 'sourcemap'],
+            'test/lesson2.js': ['webpack', 'sourcemap'],
         },
         webpack: require('./webpack.config.test'),
         webpackMiddleware: {
@@ -21,7 +21,7 @@ module.exports = function(config) {
         },
         port: 9876,
         browsers: ['ChromeHeadless'], // или Chrome или Firefox
-        captureTimeout: 20000,
+        captureTimeout: 50000,
         singleRun: true,
         plugins: [
             require('karma-mocha'),

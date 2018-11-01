@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */ 
+
 const nativeSlice = Array.prototype.slice;
 const nativeMap = Array.prototype.map;
 const nativeReduce = Array.prototype.reduce;
@@ -11,7 +13,7 @@ import {
     upperProps,
     slice,
     createProxy
-} from '../src/index';
+} from '../src/lesson2.js';
 
 describe('ДЗ 3 - объекты и массивы', () => {
     describe('forEach', () => {

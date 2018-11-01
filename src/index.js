@@ -1,26 +1,27 @@
 /* jshint esversion: 6 */ 
 
 import * as lesson1 from './lesson1.js';
-console.log('тест 1');
+import * as lesson2 from './lesson2.js';
 
-var f = lesson1.returnCounter();
+var testArr = [0, 1, 2, 3, 4, 5];
+var testArrTwo = [];
 
-console.log(f());
-console.log(f());
-console.log(f());
+function incTwo (item, i, arr) {
+    return item + '2' ;
+}
 
-console.log('тест 2');
+function addTest (item, i) {
+    return item + 'Test';
+}
 
-var l = lesson1.returnCounter(20);
+// lesson2.forEach(testArr, incTwo);
 
-console.log(l());
-console.log(l());
-console.log(l());
+testArrTwo = lesson2.map(testArr, addTest);
 
-console.log('тест returnArgumentsArray');
+for (let i = 0; i < testArrTwo.length; i++) {
+    console.log('arg = ' + testArrTwo[i]);
+}
 
-var arr = lesson1.returnArgumentsArray(1, 'two', 'belka', 'kuku');
-
-for (let i=0; (i < arr.length); i++ ) {
-    console.log(arr[i]);
+for (let i = 0; i < testArr.length; i++) {
+    console.log('argOrigin = ' + testArr[i]);
 }
