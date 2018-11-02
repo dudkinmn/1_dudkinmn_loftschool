@@ -2,6 +2,7 @@
 
 import * as lesson1 from './lesson1.js';
 import * as lesson2 from './lesson2.js';
+import * as lesson3 from './lesson3.js';
 
 var testObj = {
     name: 'fedor',
