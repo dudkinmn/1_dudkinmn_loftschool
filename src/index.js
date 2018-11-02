@@ -3,6 +3,7 @@
 import * as lesson1 from './lesson1.js';
 import * as lesson2 from './lesson2.js';
 import * as lesson3 from './lesson3.js';
+import { isArray } from 'util';
 
 var testObj = {
     name: 'fedor',
@@ -38,9 +39,18 @@ var summ = (a, b) => a + b;
 
 resultReduse = lesson2.reduce(testArr, summ, 0);
 
-console.log('ntcn');
+// console.log(lesson2.upperProps(testObj));
 
-console.log(testObj);
-console.log(lesson2.upperProps(testObj));
+var array = {};
 
-console.log('22');
+if (!(isArray(array))) {
+    console.log ('массив не массив');
+}
+
+if (array.length === 0) {
+    console.log ('массив пустой');
+}
+
+if ((!(isArray(array))) || (array.length === 0)) {
+    console.log ('массив пустой или не массив');
+}
