@@ -1,6 +1,6 @@
 /* jshint esversion: 6 */
 
-import { isArray } from 'util';
+import { isArray, isNumber, isUndefined } from 'util';
 
 /* ДЗ 3 - работа с исключениями и отладчиком */
 
@@ -104,8 +104,26 @@ function isSomeTrue(array, fn) {
  3.3: Необходимо выбрасывать исключение в случаях:
    - fn не является функцией (с текстом "fn is not a function")
  */
-function returnBadArguments(fn) {
-    var x;
+function returnBadArguments(fn, ...arr) {
+    let resultArray = [];
+
+    try {
+        if (typeof(fn) !== 'function') {
+            throw new Error('fn is not a function');
+        }
+    } catch (e) { 
+        console.log(e.name + e.message);
+    }
+
+    for ( let i = 0; i < arr.length; i++ ) {
+        try {
+            fn(arr[i]);
+        } catch (e) {
+            resultArray.push(arr[i]);
+        }
+    }
+
+    return resultArray; 
 }
 
 /*
@@ -125,8 +143,57 @@ function returnBadArguments(fn) {
    - number не является числом (с текстом "number is not a number")
    - какой-либо из аргументов div является нулем (с текстом "division by 0")
  */
-function calculator() {
-    var x;
+function calculator(number, ...arg) {
+
+    if (isUndefined(number)) {
+        number = 0;
+    } 
+
+    if (typeof number != 'number') { 
+        throw new Error ('number is not a number');
+    }
+
+    var obj = {
+
+        sum: function() {
+            for ( let i = 0; i < arg.length; i++) {
+                number += arg[i];
+            }
+
+            return number;
+        },
+
+        dif: function() {
+            for ( let i = 0; i < arg.length; i++) {
+                number -= arg[i];
+            }
+
+            return number;
+        },
+
+        div: function() {
+            for ( let i = 0; i < arg.length; i++) {
+                if ( arg[i] === 0) {
+                    throw new Error ('division by 0');
+                } else {
+                    number /= arg[i];
+                }
+            }
+
+            return number;
+        },
+
+        mul: function() {
+            for ( let i = 0; i < arg.length; i++) {
+                number *= arg[i];
+            }
+
+            return number;
+        }
+
+    };
+    
+    return obj;
 }
 
 /* При решении задач, пострайтесь использовать отладчик */
