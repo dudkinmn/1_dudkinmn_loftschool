@@ -5,6 +5,8 @@ import * as lesson2 from './lesson2.js';
 import * as lesson3 from './lesson3.js';
 import { isArray } from 'util';
 
+var test1, test2;
+
 var testObj = {
     name: 'fedor',
     lastname: 'pupkin',
@@ -41,7 +43,7 @@ resultReduse = lesson2.reduce(testArr, summ, 0);
 
 // console.log(lesson2.upperProps(testObj));
 
-var array = {};
+var array = [];
 
 if (!(isArray(array))) {
     console.log ('массив не массив');
@@ -54,3 +56,8 @@ if (array.length === 0) {
 if ((!(isArray(array))) || (array.length === 0)) {
     console.log ('массив пустой или не массив');
 }
+
+test1 = lesson3.calculator(1, 2, 3, 4, 5, 6, 7);
+test2 = test1.sum();
+
+console.log(test2);

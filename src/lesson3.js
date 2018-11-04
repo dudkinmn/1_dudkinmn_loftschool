@@ -2,6 +2,9 @@
 
 import { isArray, isNumber, isUndefined } from 'util';
 
+var test1;
+var test2;
+
 /* ДЗ 3 - работа с исключениями и отладчиком */
 
 /*
@@ -21,22 +24,23 @@ import { isArray, isNumber, isUndefined } from 'util';
    isAllTrue([100, 2, 3, 4, 5], n => n < 10) // вернет false
  */
 function isAllTrue(array, fn) {
-    
-    try {
-        if (!(isArray(array))) {
-        // if ((!(isArray(array))) || (array.length === 0)) {
-            throw new Error('empty array');
-        }
-    } catch (e) { 
-        console.log(e.name + e.message);
-    }
 
-    try {
-        if (typeof(fn) !== 'function') {
-            throw new Error('fn is not a function');
-        }
-    } catch (e) { 
-        console.log(e.name + e.message);
+    if ((array.length === 0) || (!(isArray(array))) ) {
+        throw new Error('empty array');
+    }
+    
+    /* if (array.length === 0) {
+        // if ((!(isArray(array))) || (array.length === 0)) {
+        throw new Error('empty array');
+    }  
+
+    if (!(isArray(array))) {
+        // if ((!(isArray(array))) || (array.length === 0)) {
+        throw new Error('empty array');
+    } */
+  
+    if (typeof(fn) !== 'function') {
+        throw new Error('fn is not a function');
     }
   
     for (let i = 0; i < array.length; i++) {
@@ -67,20 +71,12 @@ function isAllTrue(array, fn) {
  */
 function isSomeTrue(array, fn) {
 
-    try {
-        if ((!(isArray(array))) || (array.length === 0)) {
-            throw new Error('empty array');
-        }
-    } catch (e) { 
-        console.log(e.name + e.message);
+    if ((!(isArray(array))) || (array.length === 0)) {
+        throw new Error('empty array');
     }
 
-    try {
-        if (typeof(fn) !== 'function') {
-            throw new Error('fn is not a function');
-        }
-    } catch (e) { 
-        console.log(e.name + e.message);
+    if (typeof(fn) !== 'function') {
+        throw new Error('fn is not a function');
     }
   
     for (let i = 0; i < array.length; i++) {
@@ -107,12 +103,8 @@ function isSomeTrue(array, fn) {
 function returnBadArguments(fn, ...arr) {
     let resultArray = [];
 
-    try {
-        if (typeof(fn) !== 'function') {
-            throw new Error('fn is not a function');
-        }
-    } catch (e) { 
-        console.log(e.name + e.message);
+    if (typeof(fn) !== 'function') {
+        throw new Error('fn is not a function');
     }
 
     for ( let i = 0; i < arr.length; i++ ) {
@@ -143,58 +135,87 @@ function returnBadArguments(fn, ...arr) {
    - number не является числом (с текстом "number is not a number")
    - какой-либо из аргументов div является нулем (с текстом "division by 0")
  */
-function calculator(number, ...arg) {
-
+function calculator(number = 0) {
+    /*
     if (isUndefined(number)) {
         number = 0;
-    } 
+    }
+    */
 
     if (typeof number != 'number') { 
         throw new Error ('number is not a number');
-    }
-
+    } 
+ 
     var obj = {
 
-        sum: function() {
-            for ( let i = 0; i < arg.length; i++) {
-                number += arg[i];
+        sum () {
+            /* for ( let i = 1; i < arguments.length; i++) {
+                number += arguments[i];
+            }
+
+            return number; */
+
+            return [...arguments].reduce((sum, cur) => sum + cur, number);
+
+            // return [...arguments].reduce( ()
+        },
+
+        dif () {
+            /*
+            for ( let i = 1; i < arguments.length; i++) {
+                number -= arguments[i];
             }
 
             return number;
+            */
+
+            return [...arguments].reduce((sum, cur) => sum - cur, number);
         },
 
-        dif: function() {
-            for ( let i = 0; i < arg.length; i++) {
-                number -= arg[i];
-            }
-
-            return number;
-        },
-
-        div: function() {
-            for ( let i = 0; i < arg.length; i++) {
-                if ( arg[i] === 0) {
+        div () {
+            /*
+            for ( let i = 0; i < arguments.length; i++) {
+                if ( arguments[i] === 0) {
                     throw new Error ('division by 0');
                 } else {
-                    number /= arg[i];
+                    number /= arguments[i];
                 }
             }
 
             return number;
+            */
+
+            return [...arguments].reduce((sum, cur) => {
+                if ( cur === 0) {
+                    throw new Error ('division by 0');
+                }
+
+                return sum / cur;
+
+            }, number);
         },
 
-        mul: function() {
-            for ( let i = 0; i < arg.length; i++) {
-                number *= arg[i];
+        mul () {
+            /*
+            for ( let i = 0; i < arguments.length; i++) {
+                number *= arguments[i];
             }
 
             return number;
+            */
+
+            return [...arguments].reduce((sum, cur) => sum * cur, number);
         }
 
     };
     
     return obj;
 }
+
+test1 = calculator(1, 2, 3, 4, 5, 6);
+test2 = test1.sum();
+
+console.log(test2);
 
 /* При решении задач, пострайтесь использовать отладчик */
 
