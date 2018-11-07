@@ -3,6 +3,7 @@
 import * as lesson1 from './lesson1.js';
 import * as lesson2 from './lesson2.js';
 import * as lesson3 from './lesson3.js';
+import * as lesson4 from './lesson4.js';
 import { isArray } from 'util';
 
 var test1, test2;

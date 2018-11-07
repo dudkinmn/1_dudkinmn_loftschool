@@ -1,10 +1,3 @@
-/* jshint esversion: 6 */
-
-import { isArray, isNumber, isUndefined } from 'util';
-
-var test1;
-var test2;
-
 /* ДЗ 3 - работа с исключениями и отладчиком */
 
 /*
@@ -24,23 +17,22 @@ var test2;
    isAllTrue([100, 2, 3, 4, 5], n => n < 10) // вернет false
  */
 function isAllTrue(array, fn) {
+    var result;
 
-    if ((array.length === 0) || (!(isArray(array))) ) {
-        throw new Error('empty array');
+    try {
+        if ((array.constructor.name != Array) || (array.length === 0)) {
+            throw new Error('empty array');
+        }
+    } catch (e) { 
+        console.log(e.name + e.message);
     }
-    
-    /* if (array.length === 0) {
-        // if ((!(isArray(array))) || (array.length === 0)) {
-        throw new Error('empty array');
-    }  
 
-    if (!(isArray(array))) {
-        // if ((!(isArray(array))) || (array.length === 0)) {
-        throw new Error('empty array');
-    } */
-  
-    if (typeof(fn) !== 'function') {
-        throw new Error('fn is not a function');
+    try {
+        if (typeof(fn) !== 'function') {
+            throw new Error('fn is not a function');
+        }
+    } catch (e) { 
+        console.log(e.name + e.message);
     }
   
     for (let i = 0; i < array.length; i++) {
@@ -49,8 +41,7 @@ function isAllTrue(array, fn) {
         } 
     }
 
-    return true;
-    
+    return true; 
 }
 
 /*
@@ -70,23 +61,7 @@ function isAllTrue(array, fn) {
    isSomeTrue([1, 2, 3, 4, 5], n => n > 20) // вернет false
  */
 function isSomeTrue(array, fn) {
-
-    if ((!(isArray(array))) || (array.length === 0)) {
-        throw new Error('empty array');
-    }
-
-    if (typeof(fn) !== 'function') {
-        throw new Error('fn is not a function');
-    }
-  
-    for (let i = 0; i < array.length; i++) {
-        if (fn(array[i])) { 
-            return true; 
-        } 
-    }
-
-    return false;
-    
+    var x;
 }
 
 /*
@@ -100,22 +75,8 @@ function isSomeTrue(array, fn) {
  3.3: Необходимо выбрасывать исключение в случаях:
    - fn не является функцией (с текстом "fn is not a function")
  */
-function returnBadArguments(fn, ...arr) {
-    let resultArray = [];
-
-    if (typeof(fn) !== 'function') {
-        throw new Error('fn is not a function');
-    }
-
-    for ( let i = 0; i < arr.length; i++ ) {
-        try {
-            fn(arr[i]);
-        } catch (e) {
-            resultArray.push(arr[i]);
-        }
-    }
-
-    return resultArray; 
+function returnBadArguments(fn) {
+    var x;
 }
 
 /*
@@ -135,87 +96,9 @@ function returnBadArguments(fn, ...arr) {
    - number не является числом (с текстом "number is not a number")
    - какой-либо из аргументов div является нулем (с текстом "division by 0")
  */
-function calculator(number = 0) {
-    /*
-    if (isUndefined(number)) {
-        number = 0;
-    }
-    */
-
-    if (typeof number != 'number') { 
-        throw new Error ('number is not a number');
-    } 
- 
-    var obj = {
-
-        sum () {
-            /* for ( let i = 1; i < arguments.length; i++) {
-                number += arguments[i];
-            }
-
-            return number; */
-
-            return [...arguments].reduce((sum, cur) => sum + cur, number);
-
-            // return [...arguments].reduce( ()
-        },
-
-        dif () {
-            /*
-            for ( let i = 1; i < arguments.length; i++) {
-                number -= arguments[i];
-            }
-
-            return number;
-            */
-
-            return [...arguments].reduce((sum, cur) => sum - cur, number);
-        },
-
-        div () {
-            /*
-            for ( let i = 0; i < arguments.length; i++) {
-                if ( arguments[i] === 0) {
-                    throw new Error ('division by 0');
-                } else {
-                    number /= arguments[i];
-                }
-            }
-
-            return number;
-            */
-
-            return [...arguments].reduce((sum, cur) => {
-                if ( cur === 0) {
-                    throw new Error ('division by 0');
-                }
-
-                return sum / cur;
-
-            }, number);
-        },
-
-        mul () {
-            /*
-            for ( let i = 0; i < arguments.length; i++) {
-                number *= arguments[i];
-            }
-
-            return number;
-            */
-
-            return [...arguments].reduce((sum, cur) => sum * cur, number);
-        }
-
-    };
-    
-    return obj;
+function calculator() {
+    var x;
 }
-
-test1 = calculator(1, 2, 3, 4, 5, 6);
-test2 = test1.sum();
-
-console.log(test2);
 
 /* При решении задач, пострайтесь использовать отладчик */
 

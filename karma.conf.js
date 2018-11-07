@@ -5,10 +5,10 @@ module.exports = function(config) {
         basePath: '',
         frameworks: ['mocha', 'chai'],
         files: [
-            'test/lesson3.js'
+            'test/lesson4.js'
         ],
         preprocessors: {
-            'test/lesson3.js': ['webpack', 'sourcemap'],
+            'test/lesson4.js': ['webpack', 'sourcemap'],
         },
         webpack: require('./webpack.config.test'),
         webpackMiddleware: {
