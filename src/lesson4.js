@@ -137,26 +137,26 @@ function deleteTextNodes(where) {
  */
 function deleteTextNodesRecursive(where) {
 
-    for (var child in where.childNodes) {
+    /*   for (var child of where.childNodes) {
         
         if (child.nodeType === 3) { 
             where.removeChild(child) ;
         } else if (child.nodeType === 1) {
-            deleteTextNodesRecursive(child);
+            deleteTextNodesRecursive(child);    
         }
 
-    } 
+    } */
 
- /*   for (let i = 0; i < where.childNodes.length; i++) {
+    for (let i = 0; i < where.childNodes.length; i++) {
         let child = where.childNodes[i];
 
         if (child.nodeType === 3) {
-            where.removeChild(child); //удаляем ребенка
+            where.removeChild(child); // удаляем ребенка
             i--; // уменьшаем счетчик т.к. все сместилось
         } else if (child.nodeType === 1) {
             deleteTextNodesRecursive(child); // вызываем рекурсию
         }
-    } */
+    } 
 }
 
 /*
