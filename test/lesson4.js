@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */ 
+
 import { assert } from 'chai';
 import { randomValue } from '../helper';
 import {

@@ -180,6 +180,7 @@ function deleteTextNodesRecursive(where) {
    }
  */
 function collectDOMStat(root) {
+    var x;
 }
 
 /*
@@ -215,6 +216,7 @@ function collectDOMStat(root) {
    }
  */
 function observeChildNodes(where, fn) {
+    var x;
 }
 
 export {
