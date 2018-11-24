@@ -1,5 +1,6 @@
-/* ДЗ 5 - DOM Events */
 /* jshint esversion: 6 */ 
+/* ДЗ 5 - DOM Events */
+
 /*
  Задание 1:
 

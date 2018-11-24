@@ -1,5 +1,3 @@
-/* jshint esversion: 6 */
-
 export function randomNumber(min = 0, max = 100) {
     return Math.round((max - min) * Math.random()) + min;
 }
@@ -45,12 +43,10 @@ export function randomValue(types, maxDepth = 2) {
                     array.push(randomValue(depth == maxDepth ? allTypes.slice(0, -2) : allTypes, maxDepth - depth));
                 }
 
-                return array; 
+                return array;
+            } else {
+                return randomValue(allTypes.slice(0, -2));
             }
-            // } else {
-
-            return randomValue(allTypes.slice(0, -2));
-            // }//
         }
         case 'object': {
             if (depth < maxDepth) {
@@ -66,11 +62,9 @@ export function randomValue(types, maxDepth = 2) {
                 }
 
                 return object;
+            } else {
+                return randomValue(allTypes.slice(0, -2));
             }
-            // } else {
-
-            return randomValue(allTypes.slice(0, -2));
-            // }
         }
     }
 }
