@@ -4,6 +4,7 @@ import * as lesson1 from './lesson1.js';
 import * as lesson2 from './lesson2.js';
 import * as lesson3 from './lesson3.js';
 import * as lesson4 from './lesson4.js';
+import * as lesson6 from './lesson6';
 import { isArray } from 'util';
 
 var test1, test2;
@@ -57,8 +58,9 @@ if (array.length === 0) {
 if ((!(isArray(array))) || (array.length === 0)) {
     console.log ('массив пустой или не массив');
 }
-
+/*
 test1 = lesson3.calculator(1, 2, 3, 4, 5, 6, 7);
 test2 = test1.sum();
 
 console.log(test2);
+*/
