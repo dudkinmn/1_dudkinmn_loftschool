@@ -1,9 +1,10 @@
 /* jshint esversion: 6 */ 
 
 import "./style.css";
+//import "./img/pluse.css";
 
 VK.init({
-    apiId: 6763997
+    apiId: 6771328
 });
 
 const isMatching = (full, chunk) => new RegExp(chunk, 'i').test(full);
@@ -38,7 +39,7 @@ const renderList = (items, container) => {
     <div class="friend" data-id="{{id}}" draggable="true">
         <img class="photo" src="{{photo_50}}" alt="photo">
         <div class="name">{{first_name}} {{last_name}}</div>
-        <img class="add" src="./img/plus.png" alt="plus">
+        <img class="add" src="../img/plus.png" alt="plus">
     </div>
     {{/each}}`;
     let render = Handlebars.compile(template);
@@ -77,18 +78,21 @@ auth().then(async () => {
     try {
         const listFriendsAll = document.querySelector('.all .list');
         const listFriendsFav = document.querySelector('.fav .list');
+        console.log('1');
         const search = document.querySelector('.search');
         const save = document.querySelector('.save');
         const friends = await vkAPI('friends.get', { fields: 'photo_50' });
+        console.log('2');
     
         if (localStorage.all) {
             let allSaved = friends.items.filter(item => localStorage.all.includes(item.id));
             let favSaved = friends.items.filter(item => localStorage.fav.includes(item.id));
-    
+            console.log('3');
             renderList({count: allSaved.length, items: allSaved}, listFriendsAll);
             renderList({count: favSaved.length, items: favSaved}, listFriendsFav);
         } else {
             renderList(friends, listFriendsAll);
+            console.log('4');
         }
         
         makeDnD([listFriendsAll, listFriendsFav]);
@@ -119,5 +123,6 @@ auth().then(async () => {
         });
     } catch(e) {
         console.error(e.message);
+        console.log('6');
     }
 });
