@@ -1,7 +1,10 @@
 /* jshint esversion: 6 */ 
 
 import "./style.css";
+import picPlus from "./img/plus.png";
 //import "./img/pluse.css";
+
+
 
 VK.init({
     apiId: 6771328
@@ -39,7 +42,7 @@ const renderList = (items, container) => {
     <div class="friend" data-id="{{id}}" draggable="true">
         <img class="photo" src="{{photo_50}}" alt="photo">
         <div class="name">{{first_name}} {{last_name}}</div>
-        <img class="add" src="../img/plus.png" alt="plus">
+        <img class="add" src="${picPlus}" alt="plus">
     </div>
     {{/each}}`;
     let render = Handlebars.compile(template);
@@ -48,6 +51,8 @@ const renderList = (items, container) => {
 }
 
 const makeDnD = (zones) => {
+    //console.log(zones);
+    //debugger;
     let currentDrag;
 
     zones.forEach(zone => {
@@ -97,32 +102,36 @@ auth().then(async () => {
         
         makeDnD([listFriendsAll, listFriendsFav]);
         
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('add')) {
-                if (e.target.closest('.all')) {
-                    listFriendsFav.appendChild(e.target.parentNode);
-                } else {
-                    listFriendsAll.appendChild(e.target.parentNode);
-                }
-            }
-        });
-    
-        search.addEventListener('keyup', (e) => {
-            if (e.target.tagName === 'INPUT') {
-                let source = document.querySelector(e.target.dataset.source);
-                [...source.children].forEach(item => {
-                    item.style.display = isMatching(item.querySelector('.name').innerText, e.target.value) ? 'block' : 'none';
-                });
-            }
-        });
-    
-        save.addEventListener('click', () => {
-            localStorage.all = JSON.stringify([...listFriendsAll.children].map(item => +item.dataset.id));
-            localStorage.fav = JSON.stringify([...listFriendsFav.children].map(item => +item.dataset.id));
-            alert('Списки друзей успешно сохранены!');
-        });
     } catch(e) {
         console.error(e.message);
         console.log('6');
     }
+});
+
+
+const handleClick = (e) => {
+  if (e.target.classList.contains('add')) {
+      if (e.target.closest('.all')) {
+          listFriendsFav.appendChild(e.target.parentNode);
+      } else {
+          listFriendsAll.appendChild(e.target.parentNode);
+      }
+  }
+}; 
+
+document.addEventListener('click', handleClick);
+
+search.addEventListener('keyup', (e) => {
+  if (e.target.tagName === 'INPUT') {
+      let source = document.querySelector(e.target.dataset.source);
+      [...source.children].forEach(item => {
+          item.style.display = isMatching(item.querySelector('.name').innerText, e.target.value) ? 'block' : 'none';
+      });
+  }
+});
+
+save.addEventListener('click', () => {
+  localStorage.all = JSON.stringify([...listFriendsAll.children].map(item => +item.dataset.id));
+  localStorage.fav = JSON.stringify([...listFriendsFav.children].map(item => +item.dataset.id));
+  alert('Списки друзей успешно сохранены!');
 });
